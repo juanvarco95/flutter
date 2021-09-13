@@ -9,6 +9,7 @@ class AvatarPage extends StatelessWidget {
         title: Text('Avatar Page'),
       ),
       bottomNavigationBar: BottomAppBar(
+        color: Colors.deepPurpleAccent,
         shape: CircularNotchedRectangle(),
         child: Container(
           height: 50,
