@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+// Paquete para usar Flutter
 
 class InputPage extends StatefulWidget {
+  // Widget Full admite cambios en los valores definidos
   @override
   _InputPageState createState() => _InputPageState();
 }
@@ -10,9 +12,18 @@ class _InputPageState extends State<InputPage> {
   String _apellido = '';
   String _correo = '';
   String _password = '';
+  /* // Para la fecha se usa un TextEditingController que guarde la acción que se 
+  y luego en la función se debe usar un onTap:(){} que tenga una función FocusScope
+  para evitar que el usuario ingrese texto*/
+  String _fecha = '';
+  // Controlador de la fecha
+  TextEditingController _inputFieldDateController = TextEditingController();
 
+  // Se sobreescribe la función build para hacer la contrucción de la App
   @override
   Widget build(BuildContext context) {
+    /* Scaffold: Base que dibuja la App
+       AppBar: Barra superior */
     return Scaffold(
       appBar: AppBar(title: Text('Inputs'), backgroundColor: Colors.black87),
       bottomNavigationBar: BottomAppBar(
@@ -22,6 +33,7 @@ class _InputPageState extends State<InputPage> {
           height: 50,
         ),
       ),
+      // ListView: Se usa este tipo de Widget para hacer Scroll en la pantalla
       body: ListView(
         padding: EdgeInsets.all(10),
         children: [
@@ -33,6 +45,8 @@ class _InputPageState extends State<InputPage> {
           Divider(),
           _passwordInputs(),
           Divider(),
+          _inputFecha(context),
+          Divider(),
           _mostrarTexto(),
         ],
       ),
@@ -40,6 +54,7 @@ class _InputPageState extends State<InputPage> {
   }
 
   Widget _nombreInputs() {
+    // TextField: Para capturar los datos del usuarios
     return TextField(
       autofocus: true,
       textCapitalization: TextCapitalization.sentences,
@@ -51,6 +66,7 @@ class _InputPageState extends State<InputPage> {
           helperText: 'Sólo el nombre',
           suffixIcon: Icon(Icons.accessibility),
           icon: Icon(Icons.account_circle)),
+      // onChanged: Para efectuar los valores que ingrese el usuario
       onChanged: (valor) {
         setState(() {
           _nombre = valor;
@@ -134,5 +150,44 @@ class _InputPageState extends State<InputPage> {
         });
       },
     );
+  }
+
+  Widget _inputFecha(BuildContext context) {
+    return TextField(
+      // obscureText: true,
+
+      controller: _inputFieldDateController,
+      decoration: InputDecoration(
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
+          // counter: Text('Letras: ${_password.length}'),
+          hintText: 'Acá va fecha',
+          labelText: 'Fecha',
+          helperText: 'Sólo la fecha',
+          suffixIcon: Icon(Icons.date_range),
+          icon: Icon(Icons.date_range_sharp)),
+      // onTap: Para cuando el usuario toque se realice una acción
+      onTap: () {
+        // FocusScope: Evita que se use como un TextField normal
+        FocusScope.of(context).requestFocus(FocusNode());
+        _selectDate(context);
+      },
+    );
+  }
+
+  _selectDate(BuildContext context) async {
+    // DateTime: Para capturar el valor dado por showDatePicker
+    // showDatePicker: Retorna un future con un PopUp de la fecha
+    DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(2020),
+        lastDate: DateTime(2022)
+        locale: Locale('es','ES'));
+    if (picked != null) {
+      setState(() {
+        _fecha = picked.toString();
+        _inputFieldDateController.text = _fecha;
+      });
+    }
   }
 }

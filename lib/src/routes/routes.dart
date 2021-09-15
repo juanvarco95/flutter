@@ -7,8 +7,10 @@ import 'package:componentes/src/pages/animated_container.dart';
 import 'package:componentes/src/pages/card_page.dart';
 import 'package:componentes/src/pages/home_page.dart';
 
+// Mapa con las rutas
 Map<String, WidgetBuilder> getApplicationRoutes() {
   return <String, WidgetBuilder>{
+    // Nombre de la ruta : BuildContext que retorna el nombre de la clase
     '/': (BuildContext context) => HomePage(),
     'alert': (BuildContext context) => AlertPage(),
     'avatar': (BuildContext context) => AvatarPage(),

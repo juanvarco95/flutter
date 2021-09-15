@@ -1,3 +1,4 @@
+// Para hacer funciones matemáticas
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -21,6 +22,7 @@ class _AnimatedContainerPageState extends State<AnimatedContainerPage> {
           title: Text('Animated container'), backgroundColor: Colors.black87),
       bottomNavigationBar: BottomAppBar(
         color: Colors.deepPurpleAccent,
+        // Shape: Forma del objeto
         shape: CircularNotchedRectangle(),
         child: Container(
           height: 50,
@@ -36,6 +38,7 @@ class _AnimatedContainerPageState extends State<AnimatedContainerPage> {
             _cambiarForma();
           }),
       body: Center(
+        // Animated Container: Sirve para implementar animaciones para los cambios del contenedor
         child: AnimatedContainer(
           duration: Duration(milliseconds: 300),
           curve: Curves.ease,
@@ -50,6 +53,7 @@ class _AnimatedContainerPageState extends State<AnimatedContainerPage> {
   void _cambiarForma() {
     // Set State IMPORTANTE!!!
     setState(() {
+      // Random, número aleatorio
       Random num = Random();
       _width = num.nextInt(400).toDouble();
       _heigth = num.nextInt(400).toDouble();

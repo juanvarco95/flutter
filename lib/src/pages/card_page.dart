@@ -12,6 +12,7 @@ class CardPage extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
           children: [
             _cardTipo1(),
+            // SizedBox: Para dar un espacio
             SizedBox(height: 30.0),
             _cardTipo2(),
             SizedBox(height: 30.0),
@@ -42,7 +43,9 @@ class CardPage extends StatelessWidget {
   }
 
   Widget _cardTipo1() {
+    // Card: Widget Tipo Card
     return Card(
+      // Column: Forma de organizar los Widgets
       child: Column(
         children: [
           ListTile(
@@ -50,6 +53,7 @@ class CardPage extends StatelessWidget {
             title: Text('Texto de prueba'),
             subtitle: Text('Texto de prueba pero del subtítulo'),
           ),
+          // Forma para organizar los Widgets
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -63,6 +67,7 @@ class CardPage extends StatelessWidget {
   }
 
   Widget _cardTipo2() {
+    // Container: Widget para organizar
     final card = Container(
         child: Column(
       children: [
@@ -74,6 +79,7 @@ class CardPage extends StatelessWidget {
             image: NetworkImage(
                 'https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2020/02/spider-man-1876543.jpg')),
         Container(
+          // El padding pide un EdgeInsets para la ubicación de la imagen
           padding: EdgeInsets.all(10),
           child: Text('Spiderman'),
         ),
@@ -81,6 +87,7 @@ class CardPage extends StatelessWidget {
     ));
 
     return Container(
+      // BoxDecoration: Decoración de la imagen
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30),
           color: Colors.white,
@@ -91,6 +98,7 @@ class CardPage extends StatelessWidget {
                 offset: Offset(2, 10),
                 spreadRadius: 2)
           ]),
+      // ClipRRect para recortar cualquier parte que se salga del container
       child: ClipRRect(child: card, borderRadius: BorderRadius.circular(30)),
     );
   }

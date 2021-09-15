@@ -14,6 +14,7 @@ class AlertPage extends StatelessWidget {
         ),
       ),
       body: Center(
+        // ElevatedeButton: botón de alerta
         child: ElevatedButton(
           child: Text('Mostrar Alerta'),
           onPressed: () => _mostrarAlerta(context),
@@ -36,6 +37,7 @@ class AlertPage extends StatelessWidget {
     showDialog(
         context: context,
         builder: (context) {
+          // AlertDialog PopUp de alerta
           return AlertDialog(
             title: Text('Título'),
             content: Column(
@@ -49,6 +51,7 @@ class AlertPage extends StatelessWidget {
             ),
             actions: [
               TextButton(
+                  // Te hace salir del PopUp
                   onPressed: () => Navigator.of(context).pop(),
                   child: Text('Cancelar')),
               TextButton(
