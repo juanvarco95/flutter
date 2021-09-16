@@ -11,11 +11,16 @@ class _InputPageState extends State<InputPage> {
   String _nombre = '';
   String _apellido = '';
   String _correo = '';
+  // ignore: unused_field
   String _password = '';
   /* // Para la fecha se usa un TextEditingController que guarde la acción que se 
   y luego en la función se debe usar un onTap:(){} que tenga una función FocusScope
   para evitar que el usuario ingrese texto*/
   String _fecha = '';
+
+
+  List<String> _poderes = ['Poder1','Poder2','Poder3','Poder4'];
+  String _opcionSeleccionada = 'Poder1';
   // Controlador de la fecha
   TextEditingController _inputFieldDateController = TextEditingController();
 
@@ -46,6 +51,8 @@ class _InputPageState extends State<InputPage> {
           _passwordInputs(),
           Divider(),
           _inputFecha(context),
+          Divider(),
+          _crearDropdown(),
           Divider(),
           _mostrarTexto(),
         ],
@@ -142,8 +149,8 @@ class _InputPageState extends State<InputPage> {
           hintText: 'Acá va el password',
           labelText: 'Password',
           helperText: 'Sólo el password',
-          suffixIcon: Icon(Icons.accessibility),
-          icon: Icon(Icons.account_circle)),
+          suffixIcon: Icon(Icons.password),
+          icon: Icon(Icons.account_tree)),
       onChanged: (valor) {
         setState(() {
           _password = valor;
@@ -189,5 +196,33 @@ class _InputPageState extends State<InputPage> {
         _inputFieldDateController.text = _fecha;
       });
     }
+  }
+
+  List<DropdownMenuItem<String>> _getOpcionesDropdown() {
+    List<DropdownMenuItem<String>> lista = [];
+
+    _poderes.forEach((poder) { 
+      lista.add(DropdownMenuItem(child: Text(poder), value: poder,));
+      
+    });
+
+    return lista;
+  }
+
+  Widget _crearDropdown(){
+    return Row(
+      children: [
+        Icon(Icons.ac_unit),
+        SizedBox(width: 40),
+        DropdownButton(
+          value: _opcionSeleccionada,
+          items: _getOpcionesDropdown(),
+          onChanged: (opt) {
+            setState(() {
+              _opcionSeleccionada = opt.toString();
+            });
+          },),
+      ],
+    );
   }
 }
